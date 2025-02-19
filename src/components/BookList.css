@@ -1,0 +1,30 @@
+.book-list {
+    width: 90%;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin: 50px auto;
+    text-align: center;
+    font-size: 14;
+    overflow-x: auto;
+}
+
+.book-list-header {
+    background-color: #f8f9fa;
+    border-bottom: 2px solid #ddd;
+}
+
+.book-item-row {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
+    padding: 12px;
+    align-items: center;
+}
+
+.book-item-row span {
+    font-weight: bold;
+}
+
+h1 {
+    text-align: center;
+    margin-top: 50px;
+}

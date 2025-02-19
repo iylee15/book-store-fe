@@ -1,0 +1,12 @@
+.book-item {
+    background-color: #f2fcfd; /* 옅은 하늘색 */
+    padding: 15px;
+    border: 2px, solid, rgba(173, 173, 173, 0.5);
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+  }
+  
+  .book-title {
+    text-align: left;
+  }
