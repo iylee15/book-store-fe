@@ -9,10 +9,22 @@ import Pagination from '@/components/Pagination';
 import { StyleSheet } from '@/ui/ui';
 
 const MainPage = () => {
-    // const api = axios.create({baseURL:"http://localhost:9000/api"})
     const [bookList, setBookList] = useState<Book[]>([]);
     const [currentPage, setCurrentPage] = useState(1);
-    const [itemsPerPage, setItemsPerPage] = useState(10);
+    const [isLoading, setIsLoading] = useState(false);
+    const itemsPerPage = 10; 
+
+    const fetchBooks = async () => {
+        setIsLoading(true);
+        try {
+            const response = await getBooks();
+            setBookList(response);
+        } catch (error) {
+            console.error("Error fetching books: ", error);
+        } finally {
+            setIsLoading(false);
+        }
+    }
 
     const handleSearch = (searchTerm: string) => {
         console.log('Searching for: ', searchTerm);
@@ -23,24 +35,27 @@ const MainPage = () => {
     }
 
     useEffect(() => {
-        const fetchBooks = async () => {
-            try {
-                const response = await getBooks();
-                setBookList(response);
-            } catch (error) {
-                console.error("Error fetching books: ", error);
-            }
-        }
-        
         fetchBooks();
     }, []);
+
+    const currentBooks = bookList.slice(
+        (currentPage - 1) * itemsPerPage, 
+        currentPage * itemsPerPage
+    );
+
     return (
         <div>
-            {/* <Header/> */}
-            <BookList books = {bookList}/>
-            <StyleSheet /> {/* 스타일 적용 */}
-            <Search onSearch={handleSearch} />
-            <Pagination totalPages={10} currentPage={currentPage} onPageChange={handlePageChange} itemsPerPage={itemsPerPage} onItemsPerPageChange={setItemsPerPage}/>
+            {isLoading ? (
+                <div>로딩 중...</div>
+            ) : (
+                <>
+                    {/* <Header/> */}
+                    <BookList books = {currentBooks}/>
+                    <StyleSheet /> {/* 스타일 적용 */}
+                    <Search onSearch={handleSearch} />
+                    <Pagination totalPages={Math.ceil(bookList.length/itemsPerPage)} currentPage={currentPage} onPageChange={handlePageChange} itemsPerPage={itemsPerPage}/>
+                </>
+            )}
         </div>
     );
 };

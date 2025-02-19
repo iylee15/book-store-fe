@@ -1,9 +1,9 @@
 import React from 'react';
 import BookItem from './BookItem';
-import { Book } from '../types/types';
+import { Book, BookListProps } from '../types/types';
 import './BookList.css';
 
-const BookList = ({books}: {books:Book[]}) => {
+const BookList = ({ books }: { books:Book[] }) => {
 
     return (
         <div>

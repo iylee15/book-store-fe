@@ -1,7 +1,7 @@
 import './Pagination.css';
 import { PaginationProps } from '@/types/types';
 
-const Pagination: React.FC<PaginationProps> = ({ totalPages, currentPage,  onPageChange, itemsPerPage, onItemsPerPageChange}) => {
+const Pagination: React.FC<PaginationProps> = ({ totalPages, currentPage,  onPageChange}) => {
     const renderPaginationButtons = () => {
     const buttons = [];
       for (let i = 1; i <= totalPages; i++) {

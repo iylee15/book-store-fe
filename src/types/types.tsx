@@ -16,11 +16,15 @@ export interface Book {
 export interface BookSearchProps {
     onSearch: (searchTerm: string) => void;
   }
+
+export interface BookListProps {
+    books: Book[];
+    itemsPerPage: number;
+}
   
 export interface PaginationProps {
     totalPages: number;
     currentPage: number;
     onPageChange: (page: number) => void;
     itemsPerPage: number;
-    onItemsPerPageChange: (items: number) => void;
 }
