@@ -1,0 +1,21 @@
+.BookInfo {
+    display: flex;
+    gap: 20px;
+    margin: auto 10%;
+}
+
+.title {
+    font-weight: 600;
+    font-size: large;
+    margin-bottom: 30px;
+}
+
+hr {
+    margin: 30px auto;  
+}
+
+.auth-info {
+    display: flex;
+    gap: 30px;
+    margin-bottom: 30px;
+}

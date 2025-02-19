@@ -12,6 +12,7 @@ const MainPage = () => {
     const [bookList, setBookList] = useState<Book[]>([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [isLoading, setIsLoading] = useState(false);
+    const [filteredBooks, setFilteredBooks] = useState<Book[]>([]);
     const itemsPerPage = 10; 
 
     const fetchBooks = async () => {
@@ -28,6 +29,22 @@ const MainPage = () => {
 
     const handleSearch = (searchTerm: string) => {
         console.log('Searching for: ', searchTerm);
+        if (!searchTerm.trim()) {
+            setFilteredBooks(bookList); 
+            setCurrentPage(1);
+            return;
+        }
+
+        const searchResult = bookList.filter((book) => {
+            const searchLower = searchTerm.toLowerCase();
+            return (
+                book.title.toLowerCase().includes(searchLower) ||
+                book.author.toLowerCase().includes(searchLower)
+            );
+        });
+
+        setFilteredBooks(searchResult);
+        setCurrentPage(1); 
     };
 
     const handlePageChange = (page: number) => {
@@ -38,7 +55,7 @@ const MainPage = () => {
         fetchBooks();
     }, []);
 
-    const currentBooks = bookList.slice(
+    const currentBooks = filteredBooks.slice(
         (currentPage - 1) * itemsPerPage, 
         currentPage * itemsPerPage
     );
@@ -49,7 +66,6 @@ const MainPage = () => {
                 <div>로딩 중...</div>
             ) : (
                 <>
-                    {/* <Header/> */}
                     <BookList books = {currentBooks}/>
                     <StyleSheet /> {/* 스타일 적용 */}
                     <Search onSearch={handleSearch} />

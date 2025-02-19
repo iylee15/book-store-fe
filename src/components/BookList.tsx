@@ -14,7 +14,7 @@ const BookList = ({ books }: { books:Book[] }) => {
                         <span>제목</span>
                         <span>저자</span>
                         <span>출판사</span>
-                        <span>출판일자</span>
+                        <span>발행일</span>
                         <span>가격</span>
                     </div>
                 </div>
