@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 
 const BookItem = ({book} : {book: Book}) => { // id, 제목, 저자, 출판사, 출판일, 가격
     const router = useRouter();
-    const handleOnClick = (e) => {
+    const handleOnClick = () => {
         router.push(`/main/bookinfo/${book.id}`);
     }
     console.log("책id ", book.id);

@@ -6,13 +6,13 @@ import { getBooks } from '@/api/book';
 import BookList from '@/components/BookList';
 import Search from '@/components/Search';
 import Pagination from '@/components/Pagination';
-import { StyleSheet } from '@/ui/ui';
 
 const MainPage = () => {
     const [bookList, setBookList] = useState<Book[]>([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [isLoading, setIsLoading] = useState(false);
     const [filteredBooks, setFilteredBooks] = useState<Book[]>([]);
+    const [isSearching, setIsSearching] = useState(false);
     const itemsPerPage = 10; 
 
     const fetchBooks = async () => {
@@ -30,11 +30,12 @@ const MainPage = () => {
     const handleSearch = (searchTerm: string) => {
         console.log('Searching for: ', searchTerm);
         if (!searchTerm.trim()) {
-            setFilteredBooks(bookList); 
+            setIsSearching(false); 
             setCurrentPage(1);
             return;
         }
 
+        setIsSearching(true);
         const searchResult = bookList.filter((book) => {
             const searchLower = searchTerm.toLowerCase();
             return (
@@ -55,10 +56,9 @@ const MainPage = () => {
         fetchBooks();
     }, []);
 
-    const currentBooks = filteredBooks.slice(
-        (currentPage - 1) * itemsPerPage, 
-        currentPage * itemsPerPage
-    );
+    const currentBooks = isSearching 
+        ? filteredBooks.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)
+        : bookList.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
 
     return (
         <div>
@@ -67,7 +67,6 @@ const MainPage = () => {
             ) : (
                 <>
                     <BookList books = {currentBooks}/>
-                    <StyleSheet /> {/* 스타일 적용 */}
                     <Search onSearch={handleSearch} />
                     <Pagination totalPages={Math.ceil(bookList.length/itemsPerPage)} currentPage={currentPage} onPageChange={handlePageChange} itemsPerPage={itemsPerPage}/>
                 </>
