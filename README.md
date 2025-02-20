@@ -9,7 +9,7 @@
 - 1인 개발
 
 ## 💻 개발 환경
-- Front-end : Next.js
+- Front-end : Next.js, TypeScript
 - Back-end : Spring Boot
 
 ## 구현 내용  
