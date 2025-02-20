@@ -20,5 +20,7 @@
  
 - 책 상세 정보 페이지
 
+### 구현 영상
+https://github.com/user-attachments/assets/7b3ff35d-91ac-42e0-9997-fcbfdc8c2ca7
 
 
