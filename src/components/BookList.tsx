@@ -3,7 +3,12 @@ import BookItem from './BookItem';
 import { Book } from '../types/types';
 import './BookList.css';
 
-const BookList = ({ books }: { books:Book[] }) => {
+interface BookListProps {
+    books: Book[];
+    currentPage: number;
+}
+
+const BookList = ({ books, currentPage }: BookListProps) => {
 
     return (
         <div>
@@ -19,7 +24,7 @@ const BookList = ({ books }: { books:Book[] }) => {
                     </div>
                 </div>
                 {books.map((book) => (
-                    <BookItem key = {book.id} book = {book}/>
+                    <BookItem key = {book.id} book = {book} currentPage = {currentPage}/>
                 ))}
             </div>
         </div>

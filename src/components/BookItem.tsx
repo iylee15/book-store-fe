@@ -3,10 +3,10 @@ import React from 'react';
 import './BookItem.css';
 import { useRouter } from 'next/navigation';
 
-const BookItem = ({book} : {book: Book}) => { // id, 제목, 저자, 출판사, 출판일, 가격
+const BookItem = ({book, currentPage} : {book: Book, currentPage: number}) => { // id, 제목, 저자, 출판사, 출판일, 가격
     const router = useRouter();
     const handleOnClick = () => {
-        router.push(`/main/bookinfo/${book.id}`);
+        router.push(`/main/bookinfo/${book.id}?returnPage=${currentPage}`);
     }
     console.log("책id ", book.id);
 

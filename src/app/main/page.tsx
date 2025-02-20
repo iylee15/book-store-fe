@@ -66,7 +66,7 @@ const MainPage = () => {
                 <div>로딩 중...</div>
             ) : (
                 <>
-                    <BookList books = {currentBooks}/>
+                    <BookList books = {currentBooks} currentPage = {currentPage}/>
                     <Search onSearch={handleSearch} />
                     <Pagination totalPages={Math.ceil(bookList.length/itemsPerPage)} currentPage={currentPage} onPageChange={handlePageChange} itemsPerPage={itemsPerPage}/>
                 </>

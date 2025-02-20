@@ -5,12 +5,19 @@ import BookInfo from '@/components/BookInfo';
 import { Book } from '@/types/types';
 import React, { useEffect, useState } from 'react';
 import './BookInfoPage.css';
+import { useRouter } from 'next/navigation';
 
-const BookInfoPage = ({ params }) => {
+const BookInfoPage = ({ params, searchParams }: { params: { id: number }, searchParams: { returnPage: string } }) => {
     const [book, setBook] = useState<Book | null>();
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
-    const { id } = params;
+    const { id } = React.use(params);
+    const router = useRouter();
+
+    const handleGoBack = () => {
+        const returnPage = searchParams.returnPage || '1';
+        router.push(`/main?page=${returnPage}`);
+    };
 
     const fetchBook = async () => {
         if (!id) {
